@@ -1,0 +1,14 @@
+formatter: "markdown"
+
+output:
+  file: "README.md"
+
+settings:
+  anchor: false
+  indent: 3
+
+sections:
+  show:
+    - providers
+    - inputs
+    - outputs
