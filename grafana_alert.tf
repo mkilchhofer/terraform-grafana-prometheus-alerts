@@ -94,7 +94,7 @@ resource "grafana_rule_group" "this" {
           "conditions" = [
             {
               "evaluator" = {
-                "params" = [0]
+                "params" = [try(var.overrides[rule.value.alert].alert_threshold, 0)]
                 "type"   = "gt"
               }
               "operator" = {

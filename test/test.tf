@@ -26,6 +26,13 @@ module "test_vmagent" {
   prometheus_alerts_file_path = file("./alerts-vmagent.yml")
   folder_uid                  = grafana_folder.test.id
   datasource_uid              = "dummy"
+
+  # Overrides per alert
+  overrides = {
+    "TooManyWriteErrors" = {
+      alert_threshold = 1
+    }
+  }
 }
 
 # output "file_as_yaml" {

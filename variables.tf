@@ -13,6 +13,11 @@ variable "datasource_uid" {
   type        = string
 }
 
+variable "overrides" {
+  type = map(map(string))
+  default = {}
+}
+
 variable "default_evaluation_interval_duration" {
   description = "How often is the rule evaluated by default. (When not defined inside your Alerting rules file)"
   type = string
