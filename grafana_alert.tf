@@ -14,6 +14,8 @@ resource "grafana_rule_group" "this" {
     (parseint(formatdate("h", timeadd("1970-01-01T00:00:00Z", try(each.value.interval, var.default_evaluation_interval_duration))), 10) * 3600)
   )
 
+  disable_provenance = var.disable_provenance
+
   dynamic "rule" {
     for_each = {for rule in each.value.rules:  rule.alert => rule}
 

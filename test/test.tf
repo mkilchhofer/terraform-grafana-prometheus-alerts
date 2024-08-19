@@ -27,6 +27,9 @@ module "test_vmagent" {
   folder_uid                  = grafana_folder.test.uid
   datasource_uid              = "dummy"
 
+  # Allow editing the rule within Grafana UI
+  disable_provenance = true
+
   # Overrides per alert
   overrides = {
     "TooManyWriteErrors" = {

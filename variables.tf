@@ -29,3 +29,9 @@ variable "org_id" {
   type    = string
   default = null
 }
+
+variable "disable_provenance" {
+  description = "Allow modifying the rule group from other sources than Terraform or the Grafana API."
+  type = bool
+  default = false
+}
