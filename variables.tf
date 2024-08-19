@@ -23,3 +23,9 @@ variable "default_evaluation_interval_duration" {
   type = string
   default = "5m"
 }
+
+variable "org_id" {
+  description = "The Organization ID of of the Grafana Alerting rule groups. (Only supported with basic auth, API keys are already org-scoped)"
+  type    = string
+  default = null
+}

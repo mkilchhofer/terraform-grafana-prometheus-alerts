@@ -4,6 +4,7 @@ resource "grafana_rule_group" "this" {
 
   name             = each.value.name
   folder_uid       = var.folder_uid
+  org_id           = var.org_id
 
   # There is no function supporting Golang's "duration" (format of interval within an alert group)
   # Use timeadd() function which supports it.

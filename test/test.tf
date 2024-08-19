@@ -24,7 +24,7 @@ module "test_vmagent" {
   source = "../"
 
   prometheus_alerts_file_path = file("./alerts-vmagent.yml")
-  folder_uid                  = grafana_folder.test.id
+  folder_uid                  = grafana_folder.test.uid
   datasource_uid              = "dummy"
 
   # Overrides per alert
