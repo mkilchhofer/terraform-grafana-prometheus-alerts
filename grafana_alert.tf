@@ -24,7 +24,7 @@ resource "grafana_rule_group" "this" {
       for       = try(rule.value.for, null)
       condition = "ALERTCONDITION"
 
-      annotations = rule.value.annotations
+      annotations = {for k, v in rule.value.annotations : k => replace(v, "$value", "$values.QUERY_RESULT.Value")}
       labels      = rule.value.labels
 
       data {
