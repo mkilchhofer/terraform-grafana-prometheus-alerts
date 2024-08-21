@@ -27,6 +27,10 @@ resource "grafana_rule_group" "this" {
       annotations = {for k, v in rule.value.annotations : k => replace(v, "$value", "$values.QUERY_RESULT.Value")}
       labels      = rule.value.labels
 
+      exec_err_state = try(var.overrides[rule.value.alert].exec_err_state, null)
+      is_paused      = try(var.overrides[rule.value.alert].is_paused, null)
+      no_data_state  = try(var.overrides[rule.value.alert].no_data_state, null)
+
       data {
         ref_id = "QUERY"
         relative_time_range {
