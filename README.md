@@ -59,7 +59,7 @@ TODO
 | disable\_provenance | Allow modifying the rule group from other sources than Terraform or the Grafana API. | `bool` | `false` | no |
 | folder\_uid | The UID of the Grafana folder that the alerts belongs to. | `string` | n/a | yes |
 | org\_id | The Organization ID of of the Grafana Alerting rule groups. (Only supported with basic auth, API keys are already org-scoped) | `string` | `null` | no |
-| overrides | n/a | `map(map(string))` | `{}` | no |
+| overrides | Overrides per Alert rule | <pre>map(object({<br>    alert_threshold = optional(number)<br>    exec_err_state  = optional(string)<br>    is_paused       = optional(bool)<br>    no_data_state   = optional(string)<br>  }))</pre> | `{}` | no |
 | prometheus\_alerts\_file\_path | Path to the Prometheus Alerting rules file | `string` | n/a | yes |
 
 ### Outputs
