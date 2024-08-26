@@ -34,6 +34,10 @@ module "test_vmagent" {
   overrides = {
     "TooManyWriteErrors" = {
       alert_threshold = 1
+
+      labels = {
+        mycustomlabel = "foobar"
+      }
     }
   }
 }

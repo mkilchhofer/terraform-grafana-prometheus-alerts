@@ -20,6 +20,7 @@ variable "overrides" {
     exec_err_state  = optional(string)
     is_paused       = optional(bool)
     no_data_state   = optional(string)
+    labels          = optional(map(string))
   }))
   default = {}
 }
