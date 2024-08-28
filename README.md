@@ -24,7 +24,7 @@ module "cert_manager_rules" {
 
   prometheus_alerts_file_path = file("/path/to/alerts/cert-manager.yaml")
   folder_uid                  = grafana_folder.test.uid
-  datasource_uid              = grafana_data_source.victoria_metrics.uid
+  datasource_uid              = grafana_data_source.prometheus.uid
 }
 ```
 

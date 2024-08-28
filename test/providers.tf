@@ -8,4 +8,6 @@ terraform {
 
 provider "grafana" {
   # Configuration options
+  auth = "admin:Go4it"
+  url  = "http://localhost:3000"
 }

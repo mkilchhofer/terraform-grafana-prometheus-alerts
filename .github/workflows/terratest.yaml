@@ -1,0 +1,36 @@
+name: Terratest
+on: pull_request
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.x'
+
+      - name: Install dependencies
+        run: |
+          pwd
+          cd test
+          go get .
+
+      - name: Test with the Go CLI
+        run: |
+          pwd
+          cd test
+          go test -v
+
+      - name: Check for updated README (terraform-docs)
+        uses: terraform-docs/gh-actions@v1.2.0
+        with:
+          working-dir: .
+          fail-on-diff: "true"
+          config-file: ".terraform-docs.yml"
