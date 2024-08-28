@@ -47,8 +47,7 @@ TODO
 
 | Name | Version |
 |------|---------|
-| grafana | 3.7.0 |
-| time | n/a |
+| grafana | ~> 3.2 |
 
 ### Inputs
 
