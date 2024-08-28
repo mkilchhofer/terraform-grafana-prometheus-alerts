@@ -1,0 +1,16 @@
+# version: '3.8'
+services:
+  grafana:
+    image: docker.io/grafana/grafana:11.1.4-ubuntu
+    # container_name: grafana
+    restart: unless-stopped
+    environment:
+      # increases the log level from info to debug
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=Go4it
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'grafana_storage:/var/lib/grafana'
+volumes:
+  grafana_storage: {}
