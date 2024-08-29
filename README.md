@@ -63,10 +63,7 @@ TODO
 
 ### Outputs
 
-| Name | Description |
-|------|-------------|
-| alertsfile\_map | n/a |
-| file\_as\_yaml | n/a |
+No outputs.
 <!-- END_TF_DOCS -->
 
 [Grafana-managed alert rules]: https://grafana.com/docs/grafana/latest/alerting/fundamentals/alert-rules/#grafana-managed-alert-rules
