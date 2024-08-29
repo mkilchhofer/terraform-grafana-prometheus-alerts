@@ -27,9 +27,9 @@ resource "grafana_rule_group" "this" {
       annotations = {for k, v in rule.value.annotations : k => replace(v, "$value", "$values.QUERY_RESULT.Value")}
       labels      = merge(rule.value.labels, try(var.overrides[rule.value.alert].labels, {}))
 
-      exec_err_state = try(var.overrides[rule.value.alert].exec_err_state, null)
+      exec_err_state = try(var.overrides[rule.value.alert].exec_err_state, "Error")
       is_paused      = try(var.overrides[rule.value.alert].is_paused, null)
-      no_data_state  = try(var.overrides[rule.value.alert].no_data_state, null)
+      no_data_state  = try(var.overrides[rule.value.alert].no_data_state, "OK")
 
       data {
         ref_id = "QUERY"
