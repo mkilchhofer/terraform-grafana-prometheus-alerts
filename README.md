@@ -38,7 +38,42 @@ module "cert_manager_rules" {
 
 ## Overriding definitions of Prometheus Alerting file
 
-TODO
+The alerts defined as [Prometheus Alerting rules] can be overridden without changing the input file.
+If your Prometheus Alerting rules YAML contains an alert `alert: TooManyWriteErrors`, you can override it like this:
+
+```hcl
+module "cert_manager_rules" {
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts"
+
+  prometheus_alerts_file_path = file("/path/to/alerts/cert-manager.yaml")
+  folder_uid                  = grafana_folder.test.uid
+  datasource_uid              = grafana_data_source.prometheus.uid
+
+  # Overrides per alert
+  overrides = {
+    "TooManyWriteErrors" = {
+      alert_threshold = 1
+      is_paused       = true
+
+      labels = {
+        mycustomlabel = "foobar" # Add an extra label
+        severity      = "notify" # Override severity
+      }
+    }
+  }
+}
+```
+
+Every alert supports the following overrides:
+
+| Override parameter | Type          | Description |
+|--------------------|---------------|-------------|
+| `alert_threshold`  | `number`      | Threshold of the Grafana alert. Defaults to `0` |
+| `exec_err_state`   | `string`      | Describes what state to enter when the rule's query is invalid and the rule cannot be executed. Options are `OK`, `Error`, `KeepLast`, and `Alerting`. Defaults to `Error`. |
+| `is_paused`        | `bool`        | Sets whether the alert should be paused or not. Defaults to `false`. |
+| `no_data_state`    | `string`      | Describes what state to enter when the rule's query returns No Data. Options are `OK`, `NoData`, `KeepLast`, and `Alerting`. Defaults to `OK`. |
+| `labels`           | `map(string)` | Extra labels to add. It is also possible to override already defined labels like `severity`. |
+
 
 ## TF module documentation
 
