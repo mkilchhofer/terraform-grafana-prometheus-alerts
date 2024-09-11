@@ -1,10 +1,9 @@
 resource "grafana_rule_group" "this" {
-#   for_each = local.file_as_yaml.groups
   for_each = local.alertsfile_map
 
-  name             = each.value.name
-  folder_uid       = var.folder_uid
-  org_id           = var.org_id
+  name       = each.value.name
+  folder_uid = var.folder_uid
+  org_id     = var.org_id
 
   # There is no function supporting Golang's "duration" (format of interval within an alert group)
   # Use timeadd() function which supports it.
@@ -17,7 +16,7 @@ resource "grafana_rule_group" "this" {
   disable_provenance = var.disable_provenance
 
   dynamic "rule" {
-    for_each = {for rule in each.value.rules:  rule.alert => rule}
+    for_each = { for rule in each.value.rules : rule.alert => rule }
 
     content {
       name      = rule.value.alert
@@ -28,7 +27,7 @@ resource "grafana_rule_group" "this" {
         for k, v in merge(rule.value.annotations, try(var.overrides[rule.value.alert].annotations, {})) :
         k => replace(v, "$value", "$values.QUERY_RESULT.Value")
       }
-      labels      = merge(rule.value.labels, try(var.overrides[rule.value.alert].labels, {}))
+      labels = merge(rule.value.labels, try(var.overrides[rule.value.alert].labels, {}))
 
       exec_err_state = coalesce(try(var.overrides[rule.value.alert].exec_err_state, null), "Error")
       is_paused      = try(var.overrides[rule.value.alert].is_paused, null)
@@ -58,7 +57,7 @@ resource "grafana_rule_group" "this" {
           to   = 0
         }
         datasource_uid = "__expr__"
-        model          = jsonencode({
+        model = jsonencode({
           "conditions" = [
             {
               "evaluator" = {
@@ -100,7 +99,7 @@ resource "grafana_rule_group" "this" {
           to   = 0
         }
         datasource_uid = "__expr__"
-        model          = jsonencode({
+        model = jsonencode({
           "conditions" = [
             {
               "evaluator" = {

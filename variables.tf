@@ -28,18 +28,18 @@ variable "overrides" {
 
 variable "default_evaluation_interval_duration" {
   description = "How often is the rule evaluated by default. (When not defined inside your Alerting rules file)"
-  type = string
-  default = "5m"
+  type        = string
+  default     = "5m"
 }
 
 variable "org_id" {
   description = "The Organization ID of of the Grafana Alerting rule groups. (Only supported with basic auth, API keys are already org-scoped)"
-  type    = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "disable_provenance" {
   description = "Allow modifying the rule group from other sources than Terraform or the Grafana API."
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
