@@ -8,6 +8,20 @@ module "test_cert_manager" {
 
   # Allow editing the rule within Grafana UI
   disable_provenance = true
+
+  # Overrides per alert
+  overrides = {
+    "CertManagerAbsent" = {
+      annotations = {
+        my_custom_annotation = "foobar"
+        runbook_url          = "https://example.com"
+      }
+
+      labels = {
+        my_custom_label = "foobar"
+      }
+    }
+  }
 }
 
 # Test the module against well-known kubernetes alert rules
