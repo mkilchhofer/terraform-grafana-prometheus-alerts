@@ -24,7 +24,10 @@ resource "grafana_rule_group" "this" {
       for       = try(rule.value.for, null)
       condition = "ALERTCONDITION"
 
-      annotations = {for k, v in rule.value.annotations : k => replace(v, "$value", "$values.QUERY_RESULT.Value")}
+      annotations = {
+        for k, v in merge(rule.value.annotations, try(var.overrides[rule.value.alert].annotations, {})) :
+        k => replace(v, "$value", "$values.QUERY_RESULT.Value")
+      }
       labels      = merge(rule.value.labels, try(var.overrides[rule.value.alert].labels, {}))
 
       exec_err_state = coalesce(try(var.overrides[rule.value.alert].exec_err_state, null), "Error")
