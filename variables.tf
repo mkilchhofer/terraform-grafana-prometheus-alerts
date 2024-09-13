@@ -18,6 +18,7 @@ variable "overrides" {
   type = map(object({
     alert_threshold = optional(number)
     exec_err_state  = optional(string)
+    expr            = optional(string)
     is_paused       = optional(bool)
     no_data_state   = optional(string)
     labels          = optional(map(string))

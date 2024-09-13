@@ -42,7 +42,7 @@ resource "grafana_rule_group" "this" {
         datasource_uid = var.datasource_uid
         model = jsonencode({
           editorMode    = "code"
-          expr          = rule.value.expr
+          expr          = coalesce(try(var.overrides[rule.value.alert].expr, null), rule.value.expr)
           intervalMs    = 1000
           maxDataPoints = 43200
           refId         = "QUERY"

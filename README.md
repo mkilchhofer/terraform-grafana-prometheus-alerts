@@ -70,6 +70,7 @@ Every alert supports the following overrides:
 |--------------------|---------------|-------------|
 | `alert_threshold`  | `number`      | Threshold of the Grafana alert. Defaults to `0` |
 | `exec_err_state`   | `string`      | Describes what state to enter when the rule's query is invalid and the rule cannot be executed. Options are `OK`, `Error`, `KeepLast`, and `Alerting`. Defaults to `Error`. |
+| `expr`             | `string`      | Use a custom PromQL expression for this Grafana alert. |
 | `is_paused`        | `bool`        | Sets whether the alert should be paused or not. Defaults to `false`. |
 | `no_data_state`    | `string`      | Describes what state to enter when the rule's query returns No Data. Options are `OK`, `NoData`, `KeepLast`, and `Alerting`. Defaults to `OK`. |
 | `annotations`      | `map(string)` | Extra annotations to add. It is also possible to override already defined annotations like `runbook_url`. |
@@ -94,7 +95,7 @@ Every alert supports the following overrides:
 | disable\_provenance | Allow modifying the rule group from other sources than Terraform or the Grafana API. | `bool` | `false` | no |
 | folder\_uid | The UID of the Grafana folder that the alerts belongs to. | `string` | n/a | yes |
 | org\_id | The Organization ID of of the Grafana Alerting rule groups. (Only supported with basic auth, API keys are already org-scoped) | `string` | `null` | no |
-| overrides | Overrides per Alert rule | <pre>map(object({<br>    alert_threshold = optional(number)<br>    exec_err_state  = optional(string)<br>    is_paused       = optional(bool)<br>    no_data_state   = optional(string)<br>    labels          = optional(map(string))<br>    annotations     = optional(map(string))<br>  }))</pre> | `{}` | no |
+| overrides | Overrides per Alert rule | <pre>map(object({<br>    alert_threshold = optional(number)<br>    exec_err_state  = optional(string)<br>    expr            = optional(string)<br>    is_paused       = optional(bool)<br>    no_data_state   = optional(string)<br>    labels          = optional(map(string))<br>    annotations     = optional(map(string))<br>  }))</pre> | `{}` | no |
 | prometheus\_alerts\_file\_path | Path to the Prometheus Alerting rules file | `string` | n/a | yes |
 
 ### Outputs

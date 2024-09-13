@@ -12,6 +12,8 @@ module "test_cert_manager" {
   # Overrides per alert
   overrides = {
     "CertManagerAbsent" = {
+      expr = "absent(up{job=\"cert-manager\", cluster!~\"staging.*\"})"
+
       annotations = {
         my_custom_annotation = "foobar"
         runbook_url          = "https://example.com"
